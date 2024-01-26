@@ -31,6 +31,15 @@ change stream only works on replica sets
 
 > db.myCollection.aggregate([{'$changestream":{}}"'}])
 
+## Operation Types
+
++ Insert
++ Update
++ Replace
++ Delete
++ Invalidate
+
+
 
 
 
