@@ -37,7 +37,10 @@ change stream only works on replica sets
 + Update
 + Replace
 + Delete
-+ Invalidate
++ Invalidate ( underline stream is invalidate,)
+
+> db.collection.drop()
+
 
 
 
