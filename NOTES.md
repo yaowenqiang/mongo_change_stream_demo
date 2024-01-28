@@ -39,7 +39,15 @@ change stream only works on replica sets
 + Delete
 + Invalidate ( underline stream is invalidate,)
 
+Invalidate Triggers
+
++ Drop Collection / Database
++ Rename Collection
++ Permission Change
+
+
 > db.collection.drop()
+> db.dropDatabase()
 
 
 

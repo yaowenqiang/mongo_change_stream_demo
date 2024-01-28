@@ -1,9 +1,11 @@
  'use strict';
 
  const common = require('./common');
+ const Consumer = require('./consumer');
+ const campaign = new Consumer('campaign');
 
  (async function() {
-    const collection = await common.getCollection('demo');
+    const collection = await common.getCollection('cart');
     try {
         const cursor = await collection.aggregate([{
             $changeStream: {
@@ -11,8 +13,8 @@
             }
         }]);
         while (await cursor.hasNext()) {
-            const doc = await cursor.next();
-            common.prettyDoc(doc);
+            const event = await cursor.next();
+            campaign.process(event);
         }
 
     } catch(err) {
