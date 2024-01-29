@@ -8,7 +8,7 @@ class Consumer {
     }
 
     process(ext) {
-        console.log('*** Processor "$(this.topic)" got operationType $(ext.operationType) ***');
+        console.log(`*** Processor "${this.topic}" got operationType ${ext.operationType} ***`);
         if (this.detailed) {
             common.prettyDoc(ext.fullDocument);
         }
