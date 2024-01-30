@@ -3,6 +3,11 @@
  const common = require('./common');
  const Consumer = require('./consumer');
  const campaign = new Consumer('campaign');
+ const CartStatus = require('./cart_status')
+
+ const warehouse = new Consumer('warehouse');
+ const loyalty = new Consumer('loyalty');
+
 
  (async function() {
     const collection = await common.getCollection('cart');
@@ -17,7 +22,8 @@
                     $exists: true
                 },
                 operationType: 'update',
-                'updateDescription.updatedFields.customer': {$exists: true}
+                // 'updateDescription.updatedFields.customer': {$exists: true}
+                'updateDescription.updatedFields.status': {$in: [CartStatus.SHIP, CartStatus.COMPLETE]}
 
             }
         },{
@@ -25,7 +31,14 @@
         }]);
         while (await cursor.hasNext()) {
             const event = await cursor.next();
-            campaign.process(event);
+            if (event.fullDocument.status == CartStatus.SHOP) {
+                warehouse.process(event);
+            }
+
+            if (event.fullDocument.status == CartStatus.COMPLETE) {
+                loyalty.process(event);
+            }
+            // campaign.process(event);
         }
 
     } catch(err) {

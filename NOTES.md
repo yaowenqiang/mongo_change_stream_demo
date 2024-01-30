@@ -50,6 +50,51 @@ Invalidate Triggers
 > db.dropDatabase()
 
 
+Pipeline Rules
+
++ $changeStream must be first stage in pipeline
++ Acceptable Pipeline Stages
+  + $match
+  + $project
+  + $addFields
+  + replaceRoot
+  + $redact
+
+Multi-Document Stages (not supported)
+
++ group
++ sort
++ skip
++ limit
+
+
+Multi-Document Output(not allowed)
+
++ $unwind
+
+
+Require 2+ Collection (not supported)
+
++ $lookup
++ $graphLookup
++ $genNear
++ $text
++ $out
++ $currentOp
++ $collectionStats
+
+
+Number of Listensers:
+
+1000
+
+
+
+
+
+
+
+
 
 
 
